@@ -70,6 +70,15 @@ class Message {
   /// 扩展信息
   String? ex;
 
+  /// 指定消息接受者。如：群消息指定接收用户；通知指定接收用户-zhoup
+  List<String>? specifyRecipient;
+
+  /// 消息已读用户缓存-zhoup
+  List<String>? readUsers;
+
+  /// 消息操作状态：0、无操作；1、可使用；2、已完成；3、已失效。此字段针对消息需要交互的场景使用，不需要交互的消息默认0或空-zhoup
+  int? operateStatus;
+
   /// 自定义扩展信息，目前用于客服端处理消息时间分段
   Map<String, dynamic> exMap = {};
 
@@ -143,6 +152,9 @@ class Message {
     this.offlinePush,
     this.attachedInfo,
     this.ex,
+    this.specifyRecipient,
+    this.readUsers,
+    this.operateStatus,
     this.exMap = const <String, dynamic>{},
     this.pictureElem,
     this.soundElem,
@@ -186,6 +198,15 @@ class Message {
         : null;
     attachedInfo = json['attachedInfo'];
     ex = json['ex'];
+
+    specifyRecipient = json['specifyRecipient'] != null
+        ? json['specifyRecipient'].cast<String>()
+        : null;
+    readUsers = json['readUsers'] != null
+        ? json['readUsers'].cast<String>()
+        : null;
+    operateStatus = json['operateStatus'];
+
     exMap = json['exMap'] ?? {};
     sessionType = json['sessionType'];
     pictureElem = json['pictureElem'] != null
@@ -260,6 +281,11 @@ class Message {
     data['offlinePush'] = this.offlinePush?.toJson();
     data['attachedInfo'] = this.attachedInfo;
     data['ex'] = this.ex;
+
+    data['specifyRecipient'] = this.specifyRecipient;
+    data['readUsers'] = this.readUsers;
+    data['operateStatus'] = this.operateStatus;
+
     data['exMap'] = this.exMap;
     data['sessionType'] = this.sessionType;
     data['pictureElem'] = this.pictureElem?.toJson();
@@ -314,6 +340,11 @@ class Message {
     offlinePush = message.offlinePush;
     attachedInfo = message.attachedInfo;
     ex = message.ex;
+
+    specifyRecipient = message.specifyRecipient;
+    readUsers = message.readUsers;
+    operateStatus = message.operateStatus;
+
     exMap = message.exMap;
     sessionType = message.sessionType;
     pictureElem = message.pictureElem;
