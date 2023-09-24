@@ -28,8 +28,9 @@ buildscript {
 rootProject.allprojects {
     repositories {
         // 将aar放到libs，本地仓库替换远程仓库
-//        maven { url "$dir/libs" }
-        maven { url 'https://open-im-online.rentsoft.cn:51000/repository/maven2/' }
+        maven { url "$dir/libs" }
+        // 自定义调整了部分功能，此处不使用原始配置
+//        maven { url 'https://open-im-online.rentsoft.cn:51000/repository/maven2/' }
         google()
         mavenCentral()
     }
@@ -51,6 +52,7 @@ android {
 
 dependencies {
     // 本地依赖，现将aar复制到libs/io/openim/core-sdk/0.0.1/ 下，命名core-sdk-0.0.1.aar
-//    implementation 'io.openim:core-sdk:0.0.1@aar'
-    implementation 'io.openim:core-sdk:3.0.1+1@aar'
+    implementation 'io.openim:core-sdk:0.0.1@aar'
+    // 自定义调整了部分功能，此处不使用原始配置
+//    implementation 'io.openim:core-sdk:3.0.1+1@aar'
 }
