@@ -3,7 +3,11 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.openim</groupId>
-  <artifactId>core-sdk</artifactId>
-  <version>0.0.1</version>
+  <dependencies>
+      <dependency>
+          <groupId>io.openim</groupId>
+          <artifactId>core-sdk</artifactId>
+          <version>0.0.1</version>
+      </dependency>
+  </dependencies>
 </project>
