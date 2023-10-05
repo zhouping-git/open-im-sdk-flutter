@@ -141,6 +141,18 @@ class IMManager {
               var list = Utils.toList(value, (map) => ReadReceiptInfo.fromJson(map));
               messageManager.msgListener.recvGroupReadReceipt(list);
               break;
+            // 消息修改监听
+            case 'onRecvC2CUpdateReceipt':
+              var value = call.arguments['data']['msgReceiptList'];
+              var list = Utils.toList(value, (map) => UpdateReceiptInfo.fromJson(map));
+              messageManager.msgListener.recvC2CUpdateReceipt(list);
+              break;
+            // 消息修改监听
+            case 'onRecvGroupUpdateReceipt':
+              var value = call.arguments['data']['groupMsgReceiptList'];
+              var list = Utils.toList(value, (map) => UpdateReceiptInfo.fromJson(map));
+              messageManager.msgListener.recvGroupUpdateReceipt(list);
+              break;
             case 'onRecvMessageExtensionsAdded':
               var msgID = call.arguments['data']['msgID'];
               var value = call.arguments['data']['reactionExtensionList'];
