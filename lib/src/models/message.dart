@@ -1106,8 +1106,8 @@ class UpdateReceiptInfo {
   /// 群id
   String? groupID;
 
-  /// 修改消息的clientMsgID集合
-  List<String>? msgIDList;
+  /// 修改消息的集合
+  List<Message>? msgList;
 
   /// 读时间
   int? readTime;
@@ -1124,25 +1124,27 @@ class UpdateReceiptInfo {
   /// 是否刷新显示
   bool? isRefresh;
 
-  UpdateReceiptInfo(
-    {
-      this.userID,
-      this.groupID,
-      this.msgIDList,
-      this.readTime,
-      this.msgFrom,
-      this.contentType,
-      this.sessionType,
-      this.isRefresh,
-    }
-  );
+  UpdateReceiptInfo({
+    this.userID,
+    this.groupID,
+    this.msgList,
+    this.readTime,
+    this.msgFrom,
+    this.contentType,
+    this.sessionType,
+    this.isRefresh,
+  });
 
   UpdateReceiptInfo.fromJson(Map<String, dynamic> json) {
     userID = json['uid'] ?? json['userID'];
     groupID = json['groupID'];
-    if (json['msgIDList'] is List) {
-      msgIDList = (json['msgIDList'] as List).map((e) => '$e').toList();
-    }
+
+    msgList = json['msgList'] == null
+        ? null
+        : (json['msgList'] as List)
+        .map((e) => Message.fromJson(e))
+        .toList();
+
     readTime = json['readTime'];
     msgFrom = json['msgFrom'];
     contentType = json['contentType'];
@@ -1153,7 +1155,7 @@ class UpdateReceiptInfo {
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['userID'] = this.userID;
-    data['msgIDList'] = this.msgIDList;
+    data['msgList'] = this.msgList?.map((e) => e.toJson()).toList();
     data['readTime'] = this.readTime;
     data['msgFrom'] = this.msgFrom;
     data['contentType'] = this.contentType;
