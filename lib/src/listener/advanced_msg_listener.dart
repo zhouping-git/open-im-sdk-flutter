@@ -6,6 +6,8 @@ class OnAdvancedMsgListener {
   Function(RevokedInfo info)? onNewRecvMessageRevoked;
   Function(List<ReadReceiptInfo> list)? onRecvC2CReadReceipt;
   Function(List<ReadReceiptInfo> list)? onRecvGroupReadReceipt;
+  Function(List<UpdateReceiptInfo> list)? onRecvC2CUpdateReceipt;
+  Function(List<UpdateReceiptInfo> list)? onRecvGroupUpdateReceipt;
   Function(String msgID, List<KeyValue> list)? onRecvMessageExtensionsAdded;
   Function(String msgID, List<KeyValue> list)? onRecvMessageExtensionsChanged;
   Function(String msgID, List<String> list)? onRecvMessageExtensionsDeleted;
@@ -20,6 +22,8 @@ class OnAdvancedMsgListener {
     this.onNewRecvMessageRevoked,
     this.onRecvC2CReadReceipt,
     this.onRecvGroupReadReceipt,
+    this.onRecvC2CUpdateReceipt,
+    this.onRecvGroupUpdateReceipt,
     this.onRecvMessageExtensionsAdded,
     this.onRecvMessageExtensionsChanged,
     this.onRecvMessageExtensionsDeleted,
@@ -44,6 +48,16 @@ class OnAdvancedMsgListener {
   ///  群消息已读回执
   void recvGroupReadReceipt(List<ReadReceiptInfo> list) {
     onRecvGroupReadReceipt?.call(list);
+  }
+
+  /// C2C消息修改回执
+  void recvC2CUpdateReceipt(List<UpdateReceiptInfo> list) {
+    onRecvC2CUpdateReceipt?.call(list);
+  }
+
+  /// 群消息修改回执
+  void recvGroupUpdateReceipt(List<UpdateReceiptInfo> list) {
+    onRecvGroupUpdateReceipt?.call(list);
   }
 
   /// 收到拓展消息kv新增

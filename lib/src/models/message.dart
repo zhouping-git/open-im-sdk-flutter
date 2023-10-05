@@ -1098,6 +1098,71 @@ class ReadReceiptInfo {
   }
 }
 
+/// 消息修改回执信息
+class UpdateReceiptInfo {
+  /// 发送者id
+  String? userID;
+
+  /// 群id
+  String? groupID;
+
+  /// 修改消息的clientMsgID集合
+  List<String>? msgIDList;
+
+  /// 读时间
+  int? readTime;
+
+  /// 消息来源
+  int? msgFrom;
+
+  /// 消息类型[MessageType]
+  int? contentType;
+
+  /// 会话类型[ConversationType]
+  int? sessionType;
+
+  /// 是否刷新显示
+  bool? isRefresh;
+
+  UpdateReceiptInfo(
+    {
+      this.userID,
+      this.groupID,
+      this.msgIDList,
+      this.readTime,
+      this.msgFrom,
+      this.contentType,
+      this.sessionType,
+      this.isRefresh,
+    }
+  );
+
+  UpdateReceiptInfo.fromJson(Map<String, dynamic> json) {
+    userID = json['uid'] ?? json['userID'];
+    groupID = json['groupID'];
+    if (json['msgIDList'] is List) {
+      msgIDList = (json['msgIDList'] as List).map((e) => '$e').toList();
+    }
+    readTime = json['readTime'];
+    msgFrom = json['msgFrom'];
+    contentType = json['contentType'];
+    sessionType = json['sessionType'];
+    isRefresh = json['isRefresh'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = Map<String, dynamic>();
+    data['userID'] = this.userID;
+    data['msgIDList'] = this.msgIDList;
+    data['readTime'] = this.readTime;
+    data['msgFrom'] = this.msgFrom;
+    data['contentType'] = this.contentType;
+    data['sessionType'] = this.sessionType;
+    data['isRefresh'] = this.isRefresh;
+    return data;
+  }
+}
+
 /// 离线推送信息
 class OfflinePushInfo {
   /// 通知标题

@@ -16,9 +16,9 @@ import open_im_sdk.Open_im_sdk;
 
 public class ConnectivityListener implements open_im_sdk_callback.Base {
     public static final String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
-    private Context context;
-    private ConnectivityManager connectivityManager;
-    private Connectivity connectivity;
+    private final Context context;
+    private final ConnectivityManager connectivityManager;
+    private final Connectivity connectivity;
     private ConnectivityBroadcastReceiver receiver;
     private ConnectivityManager.NetworkCallback networkCallback;
 
