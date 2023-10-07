@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
@@ -176,86 +177,83 @@ class Message {
     this.typingElem,
   });
 
-  Message.fromJson(Map<String, dynamic> json) {
-    clientMsgID = json['clientMsgID'];
-    serverMsgID = json['serverMsgID'];
-    createTime = json['createTime'];
-    sendTime = json['sendTime'];
-    sendID = json['sendID'];
-    recvID = json['recvID'];
-    msgFrom = json['msgFrom'];
-    contentType = json['contentType'];
-    platformID = json['platformID'];
-    senderNickname = json['senderNickname'];
-    senderFaceUrl = json['senderFaceUrl'];
-    groupID = json['groupID'];
+  Message.fromJson(Map<String, dynamic> data) {
+    clientMsgID = data['clientMsgID'];
+    serverMsgID = data['serverMsgID'];
+    createTime = data['createTime'];
+    sendTime = data['sendTime'];
+    sendID = data['sendID'];
+    recvID = data['recvID'];
+    msgFrom = data['msgFrom'];
+    contentType = data['contentType'];
+    platformID = data['platformID'];
+    senderNickname = data['senderNickname'];
+    senderFaceUrl = data['senderFaceUrl'];
+    groupID = data['groupID'];
     // content = json['content'];
-    seq = json['seq'];
-    isRead = json['isRead'];
-    status = json['status'];
-    offlinePush = json['offlinePush'] != null
-        ? OfflinePushInfo.fromJson(json['offlinePush'])
+    seq = data['seq'];
+    isRead = data['isRead'];
+    status = data['status'];
+    offlinePush = data['offlinePush'] != null
+        ? OfflinePushInfo.fromJson(data['offlinePush'])
         : null;
-    attachedInfo = json['attachedInfo'];
-    ex = json['ex'];
+    attachedInfo = data['attachedInfo'];
+    ex = data['ex'];
 
-    specifyRecipient = json['specifyRecipient'] != null
-        ? json['specifyRecipient'].cast<String>()
-        : null;
-    readUsers = json['readUsers'] != null
-        ? json['readUsers'].cast<String>()
-        : null;
-    operateStatus = json['operateStatus'];
-
-    exMap = json['exMap'] ?? {};
-    sessionType = json['sessionType'];
-    pictureElem = json['pictureElem'] != null
-        ? PictureElem.fromJson(json['pictureElem'])
-        : null;
-    soundElem = json['soundElem'] != null
-        ? SoundElem.fromJson(json['soundElem'])
-        : null;
-    videoElem = json['videoElem'] != null
-        ? VideoElem.fromJson(json['videoElem'])
-        : null;
-    fileElem =
-        json['fileElem'] != null ? FileElem.fromJson(json['fileElem']) : null;
-    atTextElem = json['atTextElem'] != null
-        ? AtTextElem.fromJson(json['atTextElem'])
-        : null;
-    locationElem = json['locationElem'] != null
-        ? LocationElem.fromJson(json['locationElem'])
+    specifyRecipient = data['specifyRecipient'] != null
+        ? data['specifyRecipient'].cast<String>()
         : null;
 
-    customElem = json['customElem'] != null
-        ? CustomElem.fromJson(json['customElem'])
+    readUsers = data['readUsers'] != null
+        ? json.decode(data['readUsers'])
         : null;
-    quoteElem = json['quoteElem'] != null
-        ? QuoteElem.fromJson(json['quoteElem'])
+    operateStatus = data['operateStatus'];
+
+    exMap = data['exMap'] ?? {};
+    sessionType = data['sessionType'];
+    pictureElem = data['pictureElem'] != null
+        ? PictureElem.fromJson(data['pictureElem'])
         : null;
-    mergeElem = json['mergeElem'] != null
-        ? MergeElem.fromJson(json['mergeElem'])
+    soundElem = data['soundElem'] != null
+        ? SoundElem.fromJson(data['soundElem'])
         : null;
-    notificationElem = json['notificationElem'] != null
-        ? NotificationElem.fromJson(json['notificationElem'])
+    videoElem = data['videoElem'] != null
+        ? VideoElem.fromJson(data['videoElem'])
         : null;
-    faceElem =
-        json['faceElem'] != null ? FaceElem.fromJson(json['faceElem']) : null;
-    attachedInfoElem = json['attachedInfoElem'] != null
-        ? AttachedInfoElem.fromJson(json['attachedInfoElem'])
+    fileElem = data['fileElem'] != null ? FileElem.fromJson(data['fileElem']) : null;
+    atTextElem = data['atTextElem'] != null
+        ? AtTextElem.fromJson(data['atTextElem'])
         : null;
-    hasReadTime = json['hasReadTime'] ?? attachedInfoElem?.hasReadTime;
-    isExternalExtensions = json['isExternalExtensions'];
-    isReact = json['isReact'];
-    textElem =
-        json['textElem'] != null ? TextElem.fromJson(json['textElem']) : null;
-    cardElem =
-        json['cardElem'] != null ? CardElem.fromJson(json['cardElem']) : null;
-    advancedTextElem = json['advancedTextElem'] != null
-        ? AdvancedTextElem.fromJson(json['advancedTextElem'])
+    locationElem = data['locationElem'] != null
+        ? LocationElem.fromJson(data['locationElem'])
         : null;
-    typingElem = json['typingElem'] != null
-        ? TypingElem.fromJson(json['typingElem'])
+
+    customElem = data['customElem'] != null
+        ? CustomElem.fromJson(data['customElem'])
+        : null;
+    quoteElem = data['quoteElem'] != null
+        ? QuoteElem.fromJson(data['quoteElem'])
+        : null;
+    mergeElem = data['mergeElem'] != null
+        ? MergeElem.fromJson(data['mergeElem'])
+        : null;
+    notificationElem = data['notificationElem'] != null
+        ? NotificationElem.fromJson(data['notificationElem'])
+        : null;
+    faceElem = data['faceElem'] != null ? FaceElem.fromJson(data['faceElem']) : null;
+    attachedInfoElem = data['attachedInfoElem'] != null
+        ? AttachedInfoElem.fromJson(data['attachedInfoElem'])
+        : null;
+    hasReadTime = data['hasReadTime'] ?? attachedInfoElem?.hasReadTime;
+    isExternalExtensions = data['isExternalExtensions'];
+    isReact = data['isReact'];
+    textElem = data['textElem'] != null ? TextElem.fromJson(data['textElem']) : null;
+    cardElem = data['cardElem'] != null ? CardElem.fromJson(data['cardElem']) : null;
+    advancedTextElem = data['advancedTextElem'] != null
+        ? AdvancedTextElem.fromJson(data['advancedTextElem'])
+        : null;
+    typingElem = data['typingElem'] != null
+        ? TypingElem.fromJson(data['typingElem'])
         : null;
   }
 
@@ -283,7 +281,7 @@ class Message {
     data['ex'] = this.ex;
 
     data['specifyRecipient'] = this.specifyRecipient;
-    data['readUsers'] = this.readUsers;
+    data['readUsers'] = json.encode(this.readUsers);
     data['operateStatus'] = this.operateStatus;
 
     data['exMap'] = this.exMap;
