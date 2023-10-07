@@ -205,7 +205,7 @@ class Message {
         : null;
 
     readUsers = data['readUsers'] != null
-        ? json.decode(data['readUsers'] as String)
+        ? data['readUsers'].cast<String>()
         : null;
     operateStatus = data['operateStatus'];
 
